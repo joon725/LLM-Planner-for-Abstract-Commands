@@ -1,7 +1,6 @@
 # prompts for task planning
 
-
-# prompt1 : multiple plan generation
+# prompt for multiple plan generation
 def generate_task_plans_prompt(scene_graph, user_input):
     template = f"""
     Mission : 
@@ -83,8 +82,7 @@ def generate_task_plans_prompt(scene_graph, user_input):
     """
     return template
 
-# prompts for converting plans to sequence of codes(action functions)
-
+# prompt for converting plans to sequence of codes(action functions)
 def generate_sub_task_codes_prompt(scene_graph, user_input, plans):
     template = f"""
     Mission : 
