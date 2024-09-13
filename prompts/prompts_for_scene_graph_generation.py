@@ -1,5 +1,6 @@
 # prompts for scene graph generation
 
+# prompt with a question for obtaining workspace information 
 def ask_workspace_once_prompt(object_name): 
     template = f"""
     Mission :
@@ -14,7 +15,8 @@ def ask_workspace_once_prompt(object_name):
     """
     return template
 
-    def ask_spatial_relationship_once_prompt(object_name): # 한 물체의 near objects를 query함 :
+# prompt with a question for obtaining near objects information 
+def ask_spatial_relationship_once_prompt(object_name): 
     template = f"""
     Mission :
     You have to describe spatial relationships of a given object with other objects you see in the scene.
