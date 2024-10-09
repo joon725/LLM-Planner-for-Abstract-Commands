@@ -83,15 +83,13 @@ def generate_task_plans_prompt(scene_graph, user_input):
     return template
 
 # prompt for converting plans to sequence of codes(action functions)
-def generate_sub_task_codes_prompt(scene_graph, user_input, plans):
+def generate_sub_task_codes_prompt(plans):
     template = f"""
     Mission : 
     You're tasked with generating sequence of sub-tasks in form of python codes with the action functions you can use to conduct a task given by user.
 
     Input : 
-    1. You'll receive a user's instructions of a task
-    2. You'll receive a scene graph represented as a Python dictionary. Each key represents a workspace, and the corresponding value is a list of objects currently associated with that workspace. 
-    3. You'll receive plans consisted of steps to conduct the task.
+    1. You'll receive plans consisted of steps to conduct the task.
 
     Action function :
     1. GoTo(object) : 'object' parameter can be either the name of 'workspace' or 'object' in the scene graph. The robot agent will go in front of the 'object' or 'workspace'.
@@ -104,15 +102,6 @@ def generate_sub_task_codes_prompt(scene_graph, user_input, plans):
     
     Example :
     Input : 
-    [USER INSTRUCTION]
-    Move the study materials on the desk and move all the objects away from couch.
-
-    [Scene Graph]
-    {{'counter' : ['book','pencil'],
-    'couch' : ['remote controller','apple'],
-    'table' : ['potted plant','bowl','spoon'],
-    'desk' : ['laptop','pillow']}}
-
     [Plan]
     Plan1. 
     Step1. The 'book' and 'pencil' are better to be on the 'desk'. Also, they should be near to each other since they are often used together.  
@@ -124,8 +113,6 @@ def generate_sub_task_codes_prompt(scene_graph, user_input, plans):
     Step7. 'laptop' is fine to be on the 'desk' since 'desk' is a general place for a 'laptop'. 
     Step8. 'pillow' being on a 'desk' is totally wrong. It should be moved on the 'couch' 
     
-    Plan2. 
-
     [Output]
     Plan1.
     Step1. [GoTo(book), Pickup_Object(book), GoTo(desk), Put_Object(book), GoTo(pencil), Pickup_Object(pencil), GoTo(desk), Put_Object(pencil)] 
@@ -137,16 +124,8 @@ def generate_sub_task_codes_prompt(scene_graph, user_input, plans):
     Step7. []
     Step8. [GoTo(pillow), Pickup_Object(pillow),GoTo(couch),Put_Object(pillow)]
 
-    Plan2.
-
     [User] 
     Input : 
-    [USER INSTRUCTION]
-    {user_input}
-
-    [Scene Graph]  
-    {scene_graph}
-
     [Plan] :
     {plans} 
     """
