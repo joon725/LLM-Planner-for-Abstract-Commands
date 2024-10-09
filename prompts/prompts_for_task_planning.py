@@ -89,7 +89,7 @@ def generate_sub_task_codes_prompt(plans):
     You're tasked with generating sequence of sub-tasks in form of python codes with the action functions you can use to conduct a task given by user.
 
     Input : 
-    1. You'll receive plans consisted of steps to conduct the task.
+    1. You'll receive plan consisted of steps to conduct the task.
 
     Action function :
     1. GoTo(object) : 'object' parameter can be either the name of 'workspace' or 'object' in the scene graph. The robot agent will go in front of the 'object' or 'workspace'.
